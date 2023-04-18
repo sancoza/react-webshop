@@ -1,0 +1,85 @@
+:root {
+  --primary: #2080be;
+  --secondary: #ef7e22;
+  --accents: #bad232;
+  --white: #fff;
+  --text: #333333;
+  --gray: gray;
+  --font: 16px;
+  --transition: 0.3s linear;
+}
+/* basic styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: var(--font);
+  color: var(--text);
+}
+a {
+  transition: var(--transition);
+  text-decoration: none;
+}
+.button {
+  background-color: var(--accents);
+  padding: 10px 30px;
+  color: var(--text);
+  margin-top: 10px;
+  display: inline-block;
+}
+.button:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+.button:hover {
+  background-color: var(--primary);
+}
+/* topbar */
+
+.topbar div {
+  font-size: 0.9rem;
+}
+.topbar a {
+  color: var(--accents);
+}
+.topbar a:hover {
+  color: var(--primary);
+}
+/* navbar */
+
+.navbar-brand img {
+  width: 80px;
+}
+nav {
+  border-bottom: 5px solid var(--accents);
+}
+
+/* slider */
+.carousel-caption {
+ 
+  bottom: 10rem;
+
+}
+.carousel-item h2 span {
+  color: var(--accents);
+}
+.carousel-item h2{
+  line-height: 1;
+}
+/* products */
+.products h5:last-child {
+  color: var(--accents);
+}
+/* R E S P O N S I V E */
+
+@media(max-width:768px) {
+  .topbar {
+    display: none;
+  }
+  .products .col-md-4 {
+    margin-bottom: 20px;
+  }
+}
