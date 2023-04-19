@@ -59,23 +59,60 @@ nav {
 
 /* slider */
 .carousel-caption {
- 
   bottom: 10rem;
-
 }
 .carousel-item h2 span {
   color: var(--accents);
 }
-.carousel-item h2{
+.carousel-item h2 {
   line-height: 1;
 }
 /* products */
 .products h5:last-child {
   color: var(--accents);
 }
+.products img {
+  transition: var(--transition);
+}
+.holder {
+  overflow: hidden;
+}
+.products img:hover {
+  transform: scale(1.1) rotate(2deg);
+}
+.price {
+  color: var(--accents);
+}
+/* about */
+.about i {
+  color: var(--accents);
+  font-size: 2rem;
+}
+.about .border-dark {
+  transition: var(--transition);
+  cursor: pointer;
+}
+.about .border-dark:hover {
+  background: var(--text);
+  color: var(--white);
+}
+/* discoverOff */
+.discoverOff {
+  background-image: url(img/shop.jpg);
+  height: 63vh;
+  background-position: center;
+  background-size: cover;
+}
+footer a {
+  color: var(--accents);
+  font-weight: lighter;
+}
+footer a:hover {
+  color: var(--white);
+}
 /* R E S P O N S I V E */
 
-@media(max-width:768px) {
+@media (max-width: 768px) {
   .topbar {
     display: none;
   }
