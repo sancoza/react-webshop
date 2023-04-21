@@ -6,6 +6,7 @@ export const Admin = ({ items, setItems }) => {
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [img, setImg] = useState('');
+  const [editMode, setEditMode] = useState({ mode: false, id: null });
 
   const removeItem = (index) => {
     let tempItem = [...items];
@@ -24,62 +25,164 @@ export const Admin = ({ items, setItems }) => {
     };
     setItems([...items, newItem]);
   };
+  const editFormSubmit = (e) => {
+    e.preventDefault();
+
+
+    items.forEach((item, index) => {
+      if (index === editMode.id) {
+        const tempItems = [...items];
+        tempItems[index].title = title;
+        tempItems[index].desc = desc;
+        tempItems[index].quantity = quantity;
+        tempItems[index].price = price;
+        tempItems[index].img = img;
+        setItems([...tempItems]);
+      }
+    });
+    setEditMode({ mode: false, id: null });
+    setTitle('');
+    setDesc('');
+    setQuantity('');
+    setPrice('');
+    setImg('');
+  };
+
+  const setEdit = (index) => {
+    setEditMode({ mode: true, id: index });
+    setTitle(items[index].title);
+    setDesc(items[index].desc);
+    setQuantity(items[index].quantity);
+    setPrice(items[index].price);
+    setImg(items[index].img);
+  };
+  const cancelEdit = () => {
+    setEditMode({ mode: false, id: null });
+    setTitle('');
+    setDesc('');
+    setQuantity('');
+    setPrice('');
+    setImg('');
+  }
   return (
     <section className="single py-5">
       <article className="container">
         <div className="row align-items-center">
           <div className="col-md-10 mx-auto">
-            <form onSubmit={addFormSubmit}>
-              <input
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="m-2"
-                type="text"
-                placeholder="title"
-              />
+            {editMode.mode === false ? (
+              <form onSubmit={addFormSubmit}>
+                <input
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="m-2"
+                  type="text"
+                  placeholder="title"
+                />
 
-              <input
-                value={desc}
-                onChange={(e) => setDesc(e.target.value)}
-                className="m-2"
-                type="text"
-                placeholder="description"
-              />
+                <input
+                  value={desc}
+                  onChange={(e) => setDesc(e.target.value)}
+                  className="m-2"
+                  type="text"
+                  placeholder="description"
+                />
 
-              <input
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                className="m-2"
-                type="number"
-                placeholder="price"
-              />
+                <input
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  className="m-2"
+                  type="number"
+                  placeholder="price"
+                />
 
-              <select
-                value={img}
-                onChange={(e) => setImg(e.target.value)}
-                className="m-2"
-              >
-                <option value="img/product1.jpg">Majica</option>
-                <option value="img/product2.jpg">Torba</option>
-                <option value="img/product3.jpg">Naočare</option>
-                <option value="img/product4.jpg">Sat</option>
-                <option value="img/product5.jpg">Šešir</option>
-                <option value="img/product2.jpg">Roleri</option>
-              </select>
+                <select
+                  value={img}
+                  onChange={(e) => setImg(e.target.value)}
+                  className="m-2"
+                >
+                  <option value="img/product1.jpg">Majica</option>
+                  <option value="img/product2.jpg">Torba</option>
+                  <option value="img/product3.jpg">Naočare</option>
+                  <option value="img/product4.jpg">Sat</option>
+                  <option value="img/product5.jpg">Šešir</option>
+                  <option value="img/product6.jpg">Roleri</option>
+                </select>
 
-              <input
-                value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
-                className="m-2"
-                type="number"
-                placeholder="quantity"
-              />
-              <input
-                type="submit"
-                value="Add"
-                className="btn btn-primary m-2"
-              />
-            </form>
+                <input
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  className="m-2"
+                  type="number"
+                  placeholder="quantity"
+                />
+                <input
+                  type="submit"
+                  value="Add"
+                  className="btn btn-outline-primary m-2"
+                />
+              </form>
+            ) : (
+              <>
+                <form onSubmit={editFormSubmit}>
+                  <input
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className="m-2"
+                    type="text"
+                    placeholder="title"
+                  />
+
+                  <input
+                    value={desc}
+                    onChange={(e) => setDesc(e.target.value)}
+                    className="m-2"
+                    type="text"
+                    placeholder="description"
+                  />
+
+                  <input
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    className="m-2"
+                    type="number"
+                    placeholder="price"
+                  />
+
+                  <select
+                    value={img}
+                    onChange={(e) => setImg(e.target.value)}
+                    className="m-2"
+                  >
+                    <option value="img/product1.jpg">Majica</option>
+                    <option value="img/product2.jpg">Torba</option>
+                    <option value="img/product3.jpg">Naočare</option>
+                    <option value="img/product4.jpg">Sat</option>
+                    <option value="img/product5.jpg">Šešir</option>
+                    <option value="img/product6.jpg">Roleri</option>
+                  </select>
+
+                  <input
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    className="m-2"
+                    type="number"
+                    placeholder="quantity"
+                  />
+                  <input
+                    type="submit"
+                    value="Edit"
+                    className="btn btn-outline-warning m-2"
+                  />
+                </form>
+                <button
+                  onClick={()=>cancelEdit()}
+                  className="btn btn-danger"
+                >
+                  Cancel
+                </button>
+              </>
+            )}
+
             <table className="table table-striped table-hover shadow-lg">
               <thead>
                 <tr>
@@ -106,7 +209,12 @@ export const Admin = ({ items, setItems }) => {
                       <td>{item.quantity}</td>
                       <td>{item.price}$</td>
                       <td>
-                        <button className="btn btn-warning">Edit</button>
+                        <button
+                          onClick={() => setEdit(index)}
+                          className="btn btn-warning"
+                        >
+                          Edit
+                        </button>
                       </td>
                       <td>
                         <button
