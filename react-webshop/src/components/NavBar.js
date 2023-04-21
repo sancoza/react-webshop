@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-export const NavBar = () => {
+export const NavBar = ({cart}) => {
   return (
     <div>
        <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container">
         <Link className="navbar-brand" to={'/'}>
-          <img src="./img/logo.png" alt="logo" />
+          <img src="../img/logo.png" alt="logo" />
         </Link>
         <button
           className="navbar-toggler"
@@ -32,7 +32,7 @@ export const NavBar = () => {
               <Link className="nav-link" to="/Admin">Admin</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/Cart">Cart</Link>
+              <Link className="nav-link" to="/Cart">Cart({cart.length})</Link>
             </li>
           </ul>
         </div>

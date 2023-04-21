@@ -34,7 +34,7 @@ export const Footer = () => {
           <a href="index.html">
             <img
               className="img-fluid rounded shadow-lg border border-white border-5"
-              src="./img/logo.png"
+              src="../img/logo.png"
               alt="logo"
             />
           </a>

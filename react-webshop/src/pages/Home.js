@@ -1,6 +1,19 @@
 import React from 'react';
-
-export const Home = () => {
+import { Link } from 'react-router-dom';
+export const Home = ({ items, cart, setCart }) => {
+  const addToCart = (index) => {
+    let newCartItem = {
+      id: items[index].id,
+      title: items[index].title,
+      price: items[index].price,
+      desc: items[index].desc,
+      quantity: 1,
+      img: items[index].img,
+    };
+    setCart((prev) => {
+      return [...prev, newCartItem];
+    });
+  };
   return (
     <>
       <div
@@ -104,154 +117,35 @@ export const Home = () => {
       <section className="products py-5">
         <article className="container">
           <div className="row">
-            <div className="col-md-4 col-sm-6 mb-4">
-              <div className="card">
-                <div className="holder">
-                  <img
-                    src="./img/product1.jpg"
-                    className="card-img-top"
-                    alt="product_1"
-                  />
-                </div>
-                <div className="card-body p-4">
-                  <div className="price d-flex justify-content-between">
-                    <h5 className="card-title">Orange t-shirt</h5>
-                    <h5>30$</h5>
+            {items.map((item, index) => {
+              return (
+                <div key={index} className="col-md-4 col-sm-6">
+                  <div className="card">
+                    <Link to={`/single/${index}`} className="holder">
+                      <img
+                        src={item.img}
+                        className="card-img-top"
+                        alt="product_6"
+                      />
+                    </Link>
+                    <div className="card-body p-4">
+                      <div className="price d-flex justify-content-between">
+                        <h5 className="card-title">{item.title}</h5>
+                        <h5>{item.price} $</h5>
+                      </div>
+                      <p className="card-text">{item.desc}</p>
+                      <Link
+                        to="/cart"
+                        onClick={() => addToCart(index)}
+                        className="button"
+                      >
+                        Shop Now
+                      </Link>
+                    </div>
                   </div>
-
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a href="single.html" className="button">
-                    Shop Now
-                  </a>
                 </div>
-              </div>
-            </div>
-            <div className="col-md-4 col-sm-6">
-              <div className="card">
-                <div className="holder">
-                  <img
-                    src="./img/product2.jpg"
-                    className="card-img-top"
-                    alt="product_2"
-                  />
-                </div>
-                <div className="card-body p-4">
-                  <div className="price d-flex justify-content-between">
-                    <h5 className="card-title">Traveller bag</h5>
-                    <h5>80$</h5>
-                  </div>
-
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a href="single.html" className="button">
-                    Shop Now
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4 col-sm-6">
-              <div className="card">
-                <div className="holder">
-                  <img
-                    src="./img/product3.jpg"
-                    className="card-img-top"
-                    alt="product_3"
-                  />
-                </div>
-                <div className="card-body">
-                  <div className="price d-flex justify-content-between">
-                    <h5 className="card-title">Sunglasses</h5>
-                    <h5>50$</h5>
-                  </div>
-
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a href="single.html" className="button">
-                    Shop Now
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4 col-sm-6">
-              <div className="card">
-                <div className="holder">
-                  <img
-                    src="./img/product4.jpg"
-                    className="card-img-top"
-                    alt="product_1"
-                  />
-                </div>
-                <div className="card-body p-4">
-                  <div className="price d-flex justify-content-between">
-                    <h5 className="card-title">Woman watch</h5>
-                    <h5>120$</h5>
-                  </div>
-
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a href="single.html" className="button">
-                    Shop Now
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4 col-sm-6">
-              <div className="card">
-                <div className="holder">
-                  <img
-                    src="./img/product5.jpg"
-                    className="card-img-top"
-                    alt="product_5"
-                  />
-                </div>
-                <div className="card-body p-4">
-                  <div className="price d-flex justify-content-between">
-                    <h5 className="card-title">Summer hat</h5>
-                    <h5>40$</h5>
-                  </div>
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a href="single.html" className="button">
-                    Shop Now
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4 col-sm-6">
-              <div className="card">
-                <div className="holder">
-                  <img
-                    src="./img/product6.jpg"
-                    className="card-img-top"
-                    alt="product_6"
-                  />
-                </div>
-                <div className="card-body p-4">
-                  <div className="price d-flex justify-content-between">
-                    <h5 className="card-title">Roller skates</h5>
-                    <h5>350$</h5>
-                  </div>
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a href="single.html" className="button">
-                    Shop Now
-                  </a>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </article>
       </section>
